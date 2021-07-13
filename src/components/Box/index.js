@@ -8,7 +8,7 @@ const Box = styled.div`
 
   /* CSS Pré-Pronto */
   margin-bottom: 10px;
-  .box-link {
+  .boxLink {
     font-size: 14px;
     color: #2e7bb4;
     text-decoration: none;
@@ -19,7 +19,7 @@ const Box = styled.div`
     font-weight: 400;
     margin-bottom: 20px;
   }
-  .subtitle {
+  .subTitle {
     font-size: 18px;
     font-weight: 400;
     margin-bottom: 20px;
