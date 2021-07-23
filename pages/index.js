@@ -33,7 +33,7 @@ function ProfileSidebar(propriedades) {
 }
 
 export default function Home() {
-  const usuarioAleatorio = "lucascurtinaz";
+  const usuarioAleatorio = "peas";
   const [comunidades, setComunidades] = React.useState([
     {
       id: "189248",
@@ -61,30 +61,35 @@ export default function Home() {
           {propriedades.title} ({propriedades.items.length})
         </h2>
         <ul>
-          {/* {seguidores.map((itemAtual) => {
-            return (
-              <li key={itemAtual}>
-                <a href={`https://github.com/${itemAtual}.png`} key={itemAtual}>
-                  <img src={itemAtual} />
-                  <span>{itemAtual}</span>
-                </a>
-              </li>
-            );
-          })} */}
+          {seguidores.map((itemAtual, index) => {
+            if (index < 6) {
+              return (
+                <li key={itemAtual.id}>
+                  <a
+                    href={`https://github.com/${itemAtual.login}`}
+                    key={itemAtual.id}
+                  >
+                    <img src={itemAtual.avatar_url} />
+                    <span>{itemAtual.login}</span>
+                  </a>
+                </li>
+              );
+            }
+          })}
         </ul>
       </ProfileRelationsBoxWrapper>
     );
   }
   const [seguidores, setSeguidores] = React.useState([]);
   // 0 - Pegar o array de dados do github
-
   React.useEffect(function () {
-    fetch("https://api.github.com/users/peas/followers")
+    fetch(`https://api.github.com/users/${usuarioAleatorio}/followers`)
       .then(function (respostaDoServidor) {
         return respostaDoServidor.json();
       })
       .then(function (respostaCompleta) {
         setSeguidores(respostaCompleta);
+        console.log(respostaCompleta);
       });
   }, []);
 
@@ -95,7 +100,7 @@ export default function Home() {
 
   return (
     <>
-      <AlurakutMenu />
+      <AlurakutMenu githubUser={usuarioAleatorio} />
       <MainGrid>
         {/* <Box style="grid-area: profileArea;">Imagem</Box> */}
         <div className="profileArea" style={{ gridArea: "profileArea" }}>
